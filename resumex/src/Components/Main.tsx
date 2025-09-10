@@ -123,8 +123,12 @@ const Main: React.FC = () => {
         getFile = await ai.files.get({ name: getFile.name });
       }
       if (getFile.state === "FAILED") throw new Error("File processing failed");
-      const prompt = `You are a professional resume writer. Rewrite this resume tailored for the job description provided. Optimize it for ATS. Output STRICT JSON ONLY in this schema:
+      const prompt = `You are a professional resume writer and ATS optimization expert. 
+Rewrite this resume tailored for the provided job description. Optimize it for ATS. 
+Output STRICT JSON ONLY in this schema:
+
 {
+  "matchScore": "number (0-100)",
   "name":"string",
   "title":"string",
   "contact":{"email":"string","phone":"string","linkedin":"string"},
@@ -134,8 +138,10 @@ const Main: React.FC = () => {
   "education":[{"degree":"string","university":"string","year":"string"}],
   "projects":[{"name":"string","description":"string","tech":["string"]}]
 }
+
 Job Description: ${jobDescription}
-Return only JSON and do not wrap it with markdown or backticks.`;
+Return only JSON and do not wrap with markdown or backticks.`;
+
       const contents: (string | Part)[] = [prompt];
       if (getFile.uri && getFile.mimeType)
         contents.push(createPartFromUri(getFile.uri, getFile.mimeType));
@@ -176,11 +182,10 @@ Return only JSON and do not wrap it with markdown or backticks.`;
         <button
           onClick={handleGenerateResume}
           disabled={loading}
-          className={`w-full py-3 px-6 font-semibold rounded-lg shadow-md transition ${
-            loading
-              ? "bg-gray-400 cursor-not-allowed text-white"
-              : "bg-blue-600 hover:bg-blue-700 text-white"
-          }`}
+          className={`w-full py-3 px-6 font-semibold rounded-lg shadow-md transition ${loading
+            ? "bg-gray-400 cursor-not-allowed text-white"
+            : "bg-blue-600 hover:bg-blue-700 text-white"
+            }`}
         >
           {loading ? "Generating..." : "Generate Resume"}
         </button>
@@ -200,6 +205,18 @@ Return only JSON and do not wrap it with markdown or backticks.`;
           </PDFDownloadLink>
         </div>
       )}
+
+      {resumeData && (
+        <div className="mt-6 text-center">
+          <p className="text-lg font-semibold text-gray-700">
+            ATS Match Score:{" "}
+            <span className="text-blue-600 text-2xl font-bold">
+              {resumeData.matchScore}%
+            </span>
+          </p>
+        </div>
+      )}
+
 
       <ToastContainer position="top-right" autoClose={2500} hideProgressBar />
     </div>
