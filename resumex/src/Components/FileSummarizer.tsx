@@ -70,7 +70,7 @@ const FileSummarizer: React.FC = () => {
             }
 
             // Step 3: Generating summary
-            const content: (string | Part)[] = ['generate new resume based on my resume for a backend developer focusing on python django and ATS free. Use action words.single page same formatt '];
+            const content: (string | Part)[] = ['generate new resume based on my resume for a backend developer focusing on python django and ATS free. Use action words.single page same format   '];
             if (getFile.uri && getFile.mimeType) {
                 content.push(createPartFromUri(getFile.uri, getFile.mimeType));
             } else {
