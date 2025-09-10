@@ -1,9 +1,13 @@
 // import React from 'react'
-import Main from './Components/Main'
+
+import FileSummarizer from "./Components/FileSummarizer.tsx"
+
+// import Main from './Components/Main'
 const App = () => {
   return (
     <div>
-      <Main/>
+      {/* <Main/> */}
+      <FileSummarizer/>
     </div>
   )
 }

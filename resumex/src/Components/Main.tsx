@@ -25,7 +25,7 @@ const Main: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200 px-6">
       <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-8">
-        Resumex 🚀
+        Resume Optimiser
       </h1>
 
       <div className="bg-white shadow-lg rounded-2xl p-6 w-full max-w-lg space-y-6">
