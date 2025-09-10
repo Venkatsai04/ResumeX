@@ -1,10 +1,11 @@
-import FileSummarizer from "./Components/FileSummarizer"
+
+import Main from "./Components/Main"
 
 
 const App = () => {
   return (
     <div>
-      <FileSummarizer/>
+      <Main/>
     </div>
   )
 }
