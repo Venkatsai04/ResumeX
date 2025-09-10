@@ -26,13 +26,13 @@ function extractJSONFromText(text: string): string | null {
 }
 
 const styles = StyleSheet.create({
-  page: { padding: 30, fontSize: 12, fontFamily: "Helvetica" },
-  header: { fontSize: 16, fontWeight: "bold", color: "#2563eb", marginBottom: 4 },
-  title: { fontSize: 12, marginBottom: 8 },
-  contact: { fontSize: 10, color: "#444", marginBottom: 12 },
-  subHeader: { fontSize: 13, marginTop: 10, fontWeight: "bold", color: "#1f2937" },
-  text: { marginTop: 4, lineHeight: 1.3 },
-  listItem: { marginLeft: 12, marginTop: 2 },
+  page: { padding: 25, fontSize: 11, fontFamily: "Helvetica" },
+  header: { fontSize: 16, fontWeight: "bold", color: "#2563eb", marginBottom: 2 },
+  title: { fontSize: 12, marginBottom: 6 },
+  contact: { fontSize: 9, color: "#444", marginBottom: 8 },
+  subHeader: { fontSize: 12, marginTop: 6, fontWeight: "bold", color: "#1f2937" },
+  text: { marginTop: 2, lineHeight: 1.1 },
+  listItem: { marginLeft: 10, marginTop: 1 },
   bold: { fontWeight: "bold" },
   italic: { fontStyle: "italic" },
 });
@@ -40,43 +40,86 @@ const styles = StyleSheet.create({
 const ResumePDF = ({ data }: { data: any }) => (
   <Document>
     <Page size="A4" style={styles.page}>
+      {/* Header */}
       <Text style={styles.header}>{data.name}</Text>
       <Text style={styles.title}>{data.title}</Text>
       <Text style={styles.contact}>
         {data.contact.email} | {data.contact.phone} | {data.contact.linkedin}
       </Text>
 
+      {/* ATS Score */}
+      {data.matchScore && (
+        <Text style={{ fontSize: 11, marginBottom: 6 }}>
+          <Text style={styles.bold}>ATS Match Score:</Text> {data.matchScore}%
+        </Text>
+      )}
+
+      {/* Summary */}
       <Text style={styles.subHeader}>Summary</Text>
       <Text style={styles.text}>{data.summary}</Text>
 
+      {/* Skills */}
       <Text style={styles.subHeader}>Skills</Text>
-      {data.skills.map((s: string, i: number) => (
-        <Text key={i} style={styles.listItem}>• {s}</Text>
-      ))}
+      <View style={{ marginLeft: 8 }}>
+        <Text style={styles.text}>
+          <Text style={styles.bold}>Languages:</Text> Python, JavaScript,
+          TypeScript, C
+        </Text>
+        <Text style={styles.text}>
+          <Text style={styles.bold}>Frontend:</Text> React.js, Next.js, Redux,
+          HTML5, CSS, Tailwind, Bootstrap
+        </Text>
+        <Text style={styles.text}>
+          <Text style={styles.bold}>Backend:</Text> Node.js, Express.js, Django,
+          Flask, FastAPI, Gemini API
+        </Text>
+        <Text style={styles.text}>
+          <Text style={styles.bold}>Databases:</Text> MongoDB, SQL, Firebase,
+          cloud-native development
+        </Text>
+        <Text style={styles.text}>
+          <Text style={styles.bold}>Tools & Testing:</Text> Jira, Jest, AWS,
+          Vercel, Netlify, NPM, Git, CI/CD, Magento, AI tools, GenAI
+        </Text>
+        <Text style={styles.text}>
+          <Text style={styles.bold}>CS Fundamentals:</Text> DSA, OOPS, REST APIs,
+          DBMS, OS, LLD, SDLC
+        </Text>
+        <Text style={styles.text}>
+          <Text style={styles.bold}>Miscellaneous:</Text> ESP32, Arduino,
+          TensorFlow, Pandas, NumPy, Scikit-learn, Sensors, Figma
+        </Text>
+      </View>
 
+      {/* Experience */}
       <Text style={styles.subHeader}>Experience</Text>
       {data.experience.map((exp: any, i: number) => (
-        <View key={i} style={{ marginBottom: 6 }}>
+        <View key={i} style={{ marginBottom: 3 }}>
           <Text style={styles.bold}>
             {exp.role} — {exp.company}
           </Text>
           <Text style={styles.italic}>{exp.duration}</Text>
           {exp.achievements.map((a: string, j: number) => (
-            <Text key={j} style={styles.listItem}>• {a}</Text>
+            <Text key={j} style={styles.listItem}>
+              • {a}
+            </Text>
           ))}
         </View>
       ))}
 
+      {/* Education */}
       <Text style={styles.subHeader}>Education</Text>
       {data.education.map((edu: any, i: number) => (
         <Text key={i} style={styles.text}>
-          <Text style={styles.bold}>{edu.degree}</Text>, {edu.university} ({edu.year})
+          <Text style={styles.bold}>{edu.degree}</Text>, {edu.university} (
+          {edu.year})
         </Text>
       ))}
 
+      {/* Projects */}
       <Text style={styles.subHeader}>Projects</Text>
       {data.projects.map((proj: any, i: number) => (
-        <View key={i} style={{ marginBottom: 6 }}>
+        <View key={i} style={{ marginBottom: 3 }}>
           <Text style={styles.bold}>{proj.name}</Text>
           <Text style={styles.text}>{proj.description}</Text>
           <Text style={styles.text}>
@@ -87,6 +130,7 @@ const ResumePDF = ({ data }: { data: any }) => (
     </Page>
   </Document>
 );
+
 
 
 
