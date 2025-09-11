@@ -66,10 +66,14 @@ const ResumePDF = ({ data }: { data: any }) => (
     <Page size="A4" style={styles.page}>
       {/* Header */}
       <Text style={styles.header}>{data.name}</Text>
+      <Text style={styles.subHeader}>{data.title}</Text>
+
+      {/* Contact Info */}
       <Text style={styles.subHeader}>
-        {data.title} {"\n"}
-        {data.contact.email} | {data.contact.phone} | {data.contact.linkedin}
+        {data.contact.email} | {data.contact.phone}
+        {data.contact.github ? ` | ${data.contact.github}` : ""}
       </Text>
+
 
       {/* Summary */}
       <View style={styles.section}>
@@ -93,9 +97,7 @@ const ResumePDF = ({ data }: { data: any }) => (
             </Text>
             <Text style={styles.italic}>{exp.duration}</Text>
             {exp.achievements.map((a: string, j: number) => (
-              <Text key={j} style={styles.bullet}>
-                • {a}
-              </Text>
+              <Text key={j} style={styles.bullet}>• {a}</Text>
             ))}
           </View>
         ))}
@@ -118,9 +120,7 @@ const ResumePDF = ({ data }: { data: any }) => (
           <View key={i} style={{ marginBottom: 4 }}>
             <Text style={styles.bold}>{proj.name}</Text>
             {proj.description.map((line: string, j: number) => (
-              <Text key={j} style={styles.bullet}>
-                • {line}
-              </Text>
+              <Text key={j} style={styles.bullet}>• {line}</Text>
             ))}
             <Text style={styles.italic}>
               Tech: {proj.tech.join(", ")}
@@ -131,6 +131,7 @@ const ResumePDF = ({ data }: { data: any }) => (
     </Page>
   </Document>
 );
+
 
 
 
@@ -179,12 +180,13 @@ const Main: React.FC = () => {
                         "matchScore": "number (0-100)",
                        "name":"string",
                         "title":"string",
-                        "contact":{"email":"string","phone":"string","linkedin":"string"},
+                        "contact":{"email":"string","phone":"string","github":"string"},
                         "summary":"string",
                         "skills":["string"],
                         "experience":[{"role":"string","company":"string","duration":"string","achievements":["string"]}],
                         "education":[{"degree":"string","university":"string","year":"string"}],
-                        "projects":[{"name":"string","description":["string","string"],"tech":["string"]}]
+                        "projects":[{"name":"string","description":["string","string"],"tech":["string"]}],
+
                       }
 
                       Job Description: ${jobDescription}
