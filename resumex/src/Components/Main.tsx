@@ -26,107 +26,113 @@ function extractJSONFromText(text: string): string | null {
 }
 
 const styles = StyleSheet.create({
-  page: { padding: 25, fontSize: 11, fontFamily: "Helvetica" },
-  header: { fontSize: 16, fontWeight: "bold", color: "#2563eb", marginBottom: 2 },
-  title: { fontSize: 12, marginBottom: 6 },
-  contact: { fontSize: 9, color: "#444", marginBottom: 8 },
-  subHeader: { fontSize: 12, marginTop: 6, fontWeight: "bold", color: "#1f2937" },
-  text: { marginTop: 2, lineHeight: 1.1 },
-  listItem: { marginLeft: 10, marginTop: 1 },
-  bold: { fontWeight: "bold" },
-  italic: { fontStyle: "italic" },
+  page: { padding: 25, fontSize: 12, fontFamily: "Helvetica" },
+  header: { fontSize: 18, fontWeight: "bold", textAlign: "center" },
+  subHeader: { fontSize: 12, textAlign: "center", marginBottom: 10 },
+  section: { marginTop: 10, marginBottom: 6 },
+  sectionTitle: { fontSize: 13, fontWeight: "bold", marginBottom: 4 },
+  text: { marginBottom: 2, lineHeight: 1.3 },
+  bullet: { marginLeft: 10, marginBottom: 2 },
 });
 
-const ResumePDF = ({ data }: { data: any }) => (
+// 🎯 Resume Component
+const ResumePDF = () => (
   <Document>
     <Page size="A4" style={styles.page}>
       {/* Header */}
-      <Text style={styles.header}>{data.name}</Text>
-      <Text style={styles.title}>{data.title}</Text>
-      <Text style={styles.contact}>
-        {data.contact.email} | {data.contact.phone} | {data.contact.linkedin}
+      <Text style={styles.header}>VENKAT SAI UTHARADHI</Text>
+      <Text style={styles.subHeader}>
+        Full-Stack Software Engineer {"\n"}
+        saik87630@gmail.com | +91 9705772881 | linkedin.com/in/venkat-sai-utharadhi
+      </Text>
+      <Text style={[styles.subHeader, { fontWeight: "bold" }]}>
+        ATS Match Score: 88%
       </Text>
 
-      {/* ATS Score */}
-      {data.matchScore && (
-        <Text style={{ fontSize: 11, marginBottom: 6 }}>
-          <Text style={styles.bold}>ATS Match Score:</Text> {data.matchScore}%
-        </Text>
-      )}
-
       {/* Summary */}
-      <Text style={styles.subHeader}>Summary</Text>
-      <Text style={styles.text}>{data.summary}</Text>
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>Summary</Text>
+        <Text style={styles.text}>
+          Full-Stack Software Engineer with strong expertise in React, Node.js,
+          and the MERN stack. Skilled in designing scalable UIs, building REST
+          APIs, and deploying cloud-ready solutions. Experienced with CI/CD,
+          unit testing, and modern development practices. Passionate about
+          delivering efficient, user-focused software products.
+        </Text>
+      </View>
 
       {/* Skills */}
-      <Text style={styles.subHeader}>Skills</Text>
-      <View style={{ marginLeft: 8 }}>
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>Skills</Text>
         <Text style={styles.text}>
-          <Text style={styles.bold}>Languages:</Text> Python, JavaScript,
-          TypeScript, C
+          Languages: Python, JavaScript, TypeScript, C
         </Text>
         <Text style={styles.text}>
-          <Text style={styles.bold}>Frontend:</Text> React.js, Next.js, Redux,
-          HTML5, CSS, Tailwind, Bootstrap
+          Frontend: React.js, Next.js, Redux, HTML5, CSS, Tailwind, Bootstrap
         </Text>
         <Text style={styles.text}>
-          <Text style={styles.bold}>Backend:</Text> Node.js, Express.js, Django,
-          Flask, FastAPI, Gemini API
+          Backend: Node.js, Express.js, Django, Flask, FastAPI, Gemini API
         </Text>
         <Text style={styles.text}>
-          <Text style={styles.bold}>Databases:</Text> MongoDB, SQL, Firebase,
-          cloud-native development
+          Databases: MongoDB, SQL, Firebase, Cloud-native development
         </Text>
         <Text style={styles.text}>
-          <Text style={styles.bold}>Tools & Testing:</Text> Jira, Jest, AWS,
-          Vercel, Netlify, NPM, Git, CI/CD, Magento, AI tools, GenAI
+          Tools & Testing: Jira, Jest, AWS, Vercel, Netlify, NPM, Git, CI/CD,
+          Magento, AI tools, GenAI
         </Text>
         <Text style={styles.text}>
-          <Text style={styles.bold}>CS Fundamentals:</Text> DSA, OOPS, REST APIs,
-          DBMS, OS, LLD, SDLC
+          CS Fundamentals: DSA, OOPS, REST APIs, DBMS, OS, LLD, SDLC
         </Text>
         <Text style={styles.text}>
-          <Text style={styles.bold}>Miscellaneous:</Text> ESP32, Arduino,
-          TensorFlow, Pandas, NumPy, Scikit-learn, Sensors, Figma
+          Miscellaneous: ESP32, Arduino, TensorFlow, Pandas, NumPy,
+          Scikit-learn, Sensors, Figma
         </Text>
       </View>
 
       {/* Experience */}
-      <Text style={styles.subHeader}>Experience</Text>
-      {data.experience.map((exp: any, i: number) => (
-        <View key={i} style={{ marginBottom: 3 }}>
-          <Text style={styles.bold}>
-            {exp.role} — {exp.company}
-          </Text>
-          <Text style={styles.italic}>{exp.duration}</Text>
-          {exp.achievements.map((a: string, j: number) => (
-            <Text key={j} style={styles.listItem}>
-              • {a}
-            </Text>
-          ))}
-        </View>
-      ))}
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>Experience</Text>
+        <Text style={styles.text}>
+          Social Engineering Intern — Hamari Pehchan NGO (Jun 2023 – Dec 2023)
+        </Text>
+        <Text style={styles.bullet}>
+          • Developed and launched a landing page with MERN + Stripe integration
+        </Text>
+        <Text style={styles.bullet}>
+          • Achieved 200K+ visits and raised ₹84,000 in 2 months
+        </Text>
+        <Text style={styles.bullet}>
+          • Implemented secure payment workflows and robust API integrations
+        </Text>
+      </View>
 
       {/* Education */}
-      <Text style={styles.subHeader}>Education</Text>
-      {data.education.map((edu: any, i: number) => (
-        <Text key={i} style={styles.text}>
-          <Text style={styles.bold}>{edu.degree}</Text>, {edu.university} (
-          {edu.year})
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>Education</Text>
+        <Text style={styles.text}>
+          B.Tech in Electronics & Communication Engineering, Brilliant Institute
+          of Engineering and Technology, JNTUH (2025)
         </Text>
-      ))}
+      </View>
 
       {/* Projects */}
-      <Text style={styles.subHeader}>Projects</Text>
-      {data.projects.map((proj: any, i: number) => (
-        <View key={i} style={{ marginBottom: 3 }}>
-          <Text style={styles.bold}>{proj.name}</Text>
-          <Text style={styles.text}>{proj.description}</Text>
-          <Text style={styles.text}>
-            <Text style={styles.italic}>Tech:</Text> {proj.tech.join(", ")}
-          </Text>
-        </View>
-      ))}
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>Projects</Text>
+        <Text style={styles.text}>
+          AlarmX – Smart alarm app using React, Vite, Tailwind, Redux, Gemini AI
+        </Text>
+        <Text style={styles.text}>
+          ContentX – AI-based recommendation platform with React, Redux, Jest,
+          Gemini API
+        </Text>
+        <Text style={styles.text}>
+          DigitalX – Full-stack agency platform (MERN, Tailwind, Figma, Auth,
+          payments)
+        </Text>
+        <Text style={styles.text}>
+          For Schools – Student management system using Django + PostgreSQL
+        </Text>
+      </View>
     </Page>
   </Document>
 );
@@ -236,14 +242,14 @@ Return only JSON and do not wrap with markdown or backticks.`;
       </div>
 
       {resumeData && (
-        <div className="mt-8 w-full max-w-3xl flex justify-end">
+        <div className="flex justify-center mt-10">
           <PDFDownloadLink
-            document={<ResumePDF data={resumeData} />}
-            fileName={`${resumeData.name.replace(/\s+/g, "_")}_Resume.pdf`}
+            document={<ResumePDF />}
+            fileName="Venkat_Sai_Utharadhi_Resume.pdf"
           >
             {({ loading }) => (
-              <button className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg">
-                {loading ? "Preparing PDF..." : "Download PDF"}
+              <button className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg">
+                {loading ? "Preparing PDF..." : "Download Resume"}
               </button>
             )}
           </PDFDownloadLink>
