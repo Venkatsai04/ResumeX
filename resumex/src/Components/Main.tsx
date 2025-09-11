@@ -26,7 +26,7 @@ function extractJSONFromText(text: string): string | null {
 }
 
 const styles = StyleSheet.create({
-  page: { padding: 25, fontSize: 10, fontFamily: "poppins" },
+  page: { padding: 25, fontSize: 10, fontFamily: "Times-Roman" },
   header: { fontSize: 12, fontWeight: "bold", textAlign: "center" },
   subHeader: { fontSize: 12, textAlign: "center", marginBottom: 5 },
   section: { marginTop: 10, marginBottom: 6 },
