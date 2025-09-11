@@ -27,15 +27,39 @@ function extractJSONFromText(text: string): string | null {
 
 const styles = StyleSheet.create({
   page: { padding: 25, fontSize: 10, fontFamily: "Times-Roman" },
-  header: { fontSize: 12, fontWeight: "bold", textAlign: "center" },
-  subHeader: { fontSize: 12, textAlign: "center", marginBottom: 5 },
-  section: { marginTop: 10, marginBottom: 6 },
-  sectionTitle: { fontSize: 10, fontWeight: "bold", marginBottom: 5 },
+
+  // Header (Name, Title, Contact)
+  header: {
+    fontSize: 16,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginBottom: 2,
+  },
+  subHeader: {
+    fontSize: 11,
+    textAlign: "center",
+    marginBottom: 12,
+    color: "#333",
+  },
+
+  // Sections
+  section: { marginTop: 8, marginBottom: 8 },
+  sectionTitle: {
+    fontSize: 11,
+    fontWeight: "bold",
+    marginBottom: 4,
+    textDecoration: "underline",
+  },
   text: { marginBottom: 2, lineHeight: 1.3 },
-  bullet: { marginLeft: 10, marginBottom: 2 },
+
+  // Lists
+  bullet: { marginLeft: 12, marginBottom: 2 },
+
+  // Inline formatting
   bold: { fontWeight: "bold" },
   italic: { fontStyle: "italic" },
 });
+
 
 const ResumePDF = ({ data }: { data: any }) => (
   <Document>
@@ -148,6 +172,7 @@ const Main: React.FC = () => {
                       Rewrite this resume tailored to the job description provided. 
                       Use Google’s XYZ formula ("Did X by doing Y to achieve Z") for Experience & Projects.
                       Keep summary 3–4 lines, compact, ATS-friendly, and single-page.2-3 lines for projects.
+                      Give all projects. Achivemnets too.
                       Use this strict JSON schema only:
 
                       {
